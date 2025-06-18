@@ -5,7 +5,7 @@ metadata:
   name: cleanup-internal-requests-pipelineruns
   namespace: stonesoup-int-srvc
 spec:
-  schedule: "10 03 * * *"
+  schedule: "10 * * * *"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -25,7 +25,7 @@ spec:
                 - name: CR_NAMESPACE
                   value: "stonesoup-int-srvc"
                 - name: OLDER_THAN
-                  value: "yesterday"
+                  value: "12 hours ago"
                 - name: LABELS
                   value: "pipelines.appstudio.openshift.io/type=release"
               command:
