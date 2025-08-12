@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":disableDependencyDashboard",
+    ":gitSignOff"
+  ],
+  "timezone": "UTC",
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "enabledManagers": ["kubernetes"],
+  "kubernetes": {
+    "managerFilePatterns": ["**/*.yaml"]
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["kubernetes"],
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["quay.io/konflux-ci/release-service-utils"],
+      "pinDigests": true,
+      "schedule": [
+        "on wednesday at 2pm"
+      ]
+    }
+  ]
+}
