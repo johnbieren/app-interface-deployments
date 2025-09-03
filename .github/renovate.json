@@ -18,9 +18,7 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["quay.io/konflux-ci/release-service-utils"],
       "pinDigests": true,
-      "schedule": [
-        "on wednesday at 2pm"
-      ]
+      "schedule": ["* 15 * * 3"]
     }
   ]
 }

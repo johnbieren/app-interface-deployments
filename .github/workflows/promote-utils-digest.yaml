@@ -1,0 +1,37 @@
+name: Promote stable utils digest (main to stable)
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Run in dry mode (true/false)
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  schedule:
+    - cron: "0 14 * * 3" # Every Wednesday at 14:00 UTC
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  promote-stable-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Promote digest from main to stable
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: "${{ github.actor }}"
+          GIT_AUTHOR_EMAIL: "${{ github.actor }}@users.noreply.github.com"
+        run: |
+          .github/scripts/promote-image-digest.sh \
+            --source main \
+            --target stable \
+            --feature update-stable-util-image \
+            --image quay.io/konflux-ci/release-service-utils \
+            --dry-run "${{ github.event.inputs.dry_run || 'false' }}"
