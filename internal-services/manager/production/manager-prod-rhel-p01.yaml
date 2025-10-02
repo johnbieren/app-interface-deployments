@@ -61,7 +61,7 @@ spec:
             - /mnt/internal-services/remote-client-config/kubeconfig
             - --leader-election-id
             - "prod-rhel-p01"
-          image: quay.io/konflux-ci/internal-services:2d2990adbf3f46c8a8e0b90ce5b8118e0ba2327e
+          image: quay.io/konflux-ci/internal-services:212e8f87044e468a8bbfc342a1cb2a87f7cde14b
           name: manager
           securityContext:
             allowPrivilegeEscalation: false
